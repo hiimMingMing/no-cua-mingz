@@ -30,8 +30,18 @@
     <div class="result" id="result">Sum:</div>
 
     <script>
+      window.onload = function () {
+        const savedText = localStorage.getItem("savedText");
+        if (savedText) {
+          document.getElementById("inputText").value = savedText;
+          calculateSum(); // Calculate the sum for the loaded text
+        }
+      };
+
       function calculateSum() {
         const text = document.getElementById("inputText").value;
+        const savedText = localStorage.setItem("savedText", text);
+
         const numbers = text.match(/-?\d+/g); // Extract all numbers including negatives from the text
         const sum = numbers
           ? numbers.reduce((acc, num) => acc + parseInt(num, 10), 0)
